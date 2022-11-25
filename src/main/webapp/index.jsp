@@ -22,7 +22,7 @@
      <div class="form-group row justify-content-center mt-5">
       <div class="col-sm-3">
        <input type="text" class="form-control" name="firstName"
-        placeholder="Enter first name">
+        placeholder="First name">
       </div>
      </div>
 
