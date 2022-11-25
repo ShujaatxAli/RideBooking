@@ -15,7 +15,7 @@
 
 <div class="col-lg-12 text-center">
 			<span>
-            <p class="mb-2 mt-2">Millions of people's life has changed, millions more awaiting your donation and Everuthing</p>
+            <p class="mb-2 mt-2">If you look at what you have in life, you'll always have more. If you look at what you don't have in life, you'll never have enough.</p>
 			</span>
           </div>
 
