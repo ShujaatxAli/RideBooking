@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://main" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://main" xmlns:intf="http://main" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://main" xmlns="http://www.w3.org/2001/XMLSchema">
+   <element name="getBookingInfo">
+    <complexType/>
+   </element>
+   <element name="getBookingInfoResponse">
+    <complexType/>
+   </element>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="getBookingInfoRequest">
+
+      <wsdl:part element="impl:getBookingInfo" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getBookingInfoResponse">
+
+      <wsdl:part element="impl:getBookingInfoResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="Booking">
+
+      <wsdl:operation name="getBookingInfo">
+
+         <wsdl:input message="impl:getBookingInfoRequest" name="getBookingInfoRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getBookingInfoResponse" name="getBookingInfoResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="BookingSoapBinding" type="impl:Booking">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="getBookingInfo">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getBookingInfoRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getBookingInfoResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="BookingService">
+
+      <wsdl:port binding="impl:BookingSoapBinding" name="Booking">
+
+         <wsdlsoap:address location="http://localhost:8080/RideBooking/services/Booking"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

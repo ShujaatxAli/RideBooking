@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://main" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://main" xmlns:intf="http://main" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://main" xmlns="http://www.w3.org/2001/XMLSchema">
+   <element name="getCarInfo">
+    <complexType>
+     <sequence>
+      <element name="ID" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getCarInfoResponse">
+    <complexType>
+     <sequence>
+      <element name="getCarInfoReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="getCarInfoResponse">
+
+      <wsdl:part element="impl:getCarInfoResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getCarInfoRequest">
+
+      <wsdl:part element="impl:getCarInfo" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="Car">
+
+      <wsdl:operation name="getCarInfo">
+
+         <wsdl:input message="impl:getCarInfoRequest" name="getCarInfoRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getCarInfoResponse" name="getCarInfoResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="CarSoapBinding" type="impl:Car">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="getCarInfo">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getCarInfoRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getCarInfoResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="CarService">
+
+      <wsdl:port binding="impl:CarSoapBinding" name="Car">
+
+         <wsdlsoap:address location="http://localhost:8080/RideBooking/services/Car"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>
