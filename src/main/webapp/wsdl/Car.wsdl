@@ -5,16 +5,12 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
  <wsdl:types>
   <schema elementFormDefault="qualified" targetNamespace="http://main" xmlns="http://www.w3.org/2001/XMLSchema">
    <element name="getCarInfo">
-    <complexType>
-     <sequence>
-      <element name="ID" type="xsd:string"/>
-     </sequence>
-    </complexType>
+    <complexType/>
    </element>
    <element name="getCarInfoResponse">
     <complexType>
      <sequence>
-      <element name="getCarInfoReturn" type="xsd:string"/>
+      <element maxOccurs="unbounded" name="getCarInfoReturn" type="xsd:string"/>
      </sequence>
     </complexType>
    </element>

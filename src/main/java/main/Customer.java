@@ -1,34 +1,40 @@
 package main;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class Customer {
 	
-	public String getCustomerInfo(String ID){
+public ArrayList<String> getCustomerInfo(){
+		
+		ArrayList<String> driverdetails = new ArrayList<String>();
 		
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ridebooking", "root", "root");
 		   	Statement stmt =conn.createStatement();
 		   	
-		   	String cust ="select * from customer where Cust_ID ="+ID;
+		   	String driver ="select Cust_ID,Cust_Fname,Cust_Lname,Cust_Email,Cust_Phone,Cust_Pass from customer;";
 		   	
-		   	ResultSet rs = stmt.executeQuery(cust);
-		   	rs.next();
-			
-			String CustInfo = "ID: " + rs.getString(1) + " Name: " + rs.getString(2) + " " +rs.getString(3) + " Email " + rs.getString(4) + " Phone: " + rs.getString(5) + " Password: " + rs.getString(6);
-			
-			
+		   	ResultSet rs = stmt.executeQuery(driver);
+
+			while(rs.next()){
+					   		
+				driverdetails.add(rs.getString(1));
+				driverdetails.add(rs.getString(2)+" "+rs.getString(3));
+				driverdetails.add(rs.getString(4));
+				driverdetails.add(rs.getString(5));
+				driverdetails.add(rs.getString(6));
+			}
 			conn.close();
 			
-			return CustInfo;
 			
 			}catch(Exception e) {
 				
 				System.out.println(e);
 			}
 		
-		return "";
+		return driverdetails;
 	} 
 
 }

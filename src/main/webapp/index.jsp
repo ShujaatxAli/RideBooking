@@ -62,7 +62,7 @@
             <h2>An Online Ride Booking System with the Lowest Fare rate.</h2>
             <div class="text-center text-lg-start">
               <a href="#about" class="btn-get-started scrollto">Sign Up as Customer</a>
-              <a href="#about" class="btn-get-started2 scrollto">Sign Up as Captain</a>
+              <a href="#driver" class="btn-get-started2 scrollto">Sign Up as Captain</a>
             </div>
           </div>
         </div>
@@ -124,7 +124,7 @@
       </div>
 		 <div class="col-sm-5">
        <input type="number" class="form-control no-spin" name="Phone"
-        placeholder="Phone">
+        placeholder="Phone"  maxlength="10" pattern="\d{10}">
       </div>
      </div>
      
@@ -194,7 +194,7 @@
      <div class="form-group row mt-3">
       <div class="col-sm-5">
        <input type="number" class="form-control no-spin" name="Phone"
-        placeholder="Phone">
+        placeholder="Phone"  maxlength="10" pattern="\d{10}">
       </div>
 		 <div class="col-sm-5">
        <input type="password" class="form-control" name="Pass"

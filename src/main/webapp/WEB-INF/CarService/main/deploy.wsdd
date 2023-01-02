@@ -11,7 +11,6 @@
       <parameter name="wsdlPortType" value="Car"/>
       <parameter name="typeMappingVersion" value="1.2"/>
       <operation xmlns:operNS="http://main" xmlns:retNS="http://main" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getCarInfo" qname="operNS:getCarInfo" returnQName="retNS:getCarInfoReturn" returnType="rtns:string" soapAction="">
-        <parameter xmlns:pns="http://main" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:ID" type="tns:string"/>
       </operation>
       <parameter name="allowedMethods" value="getCarInfo"/>
 

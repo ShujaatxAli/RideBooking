@@ -1,3 +1,4 @@
+<%@page import="main.LoginDetails"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     
@@ -15,22 +16,33 @@ ResultSet resultSet = null;
 String Email = request.getParameter("Email");
 String Pass = request.getParameter("Pass");
 
+session.setAttribute("Email",Email);
+session.setAttribute("Pass",Pass);  
+
+Email=(String)session.getAttribute("Email");
+Pass=(String)session.getAttribute("Pass");  
+
 %>
 
 <%
-PreparedStatement pst = conn.prepareStatement("Select Cust_Email,Cust_Pass from customer where Cust_Email=? and Cust_Pass=?");
-pst.setString(1, Email);
-pst.setString(2, Pass);
+//PreparedStatement pst = conn.prepareStatement("Select Cust_Email,Cust_Pass from customer where Cust_Email=? and Cust_Pass=?");
+//pst.setString(1, Email);
+//pst.setString(2, Pass);
 
-ResultSet rs = pst.executeQuery();                        
-if(rs.next()){
+//ResultSet rs = pst.executeQuery(); 
+
+LoginDetails logobj = new LoginDetails();
+
+if(logobj.getLoginInfo(Email, Pass) == 1){
 	
 }
-else{
+else if (logobj.getLoginInfo(Email, Pass) == 0){
 	%><script>  window.location='error.jsp' </script><%
 }
 	
 %>
+
+ 
 
 <!DOCTYPE html>
 <html lang="en">
@@ -94,9 +106,9 @@ else{
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto" href="index.html#hero">Home</a></li>
-          <li><a class="nav-link scrollto" href="index.html#about">Sign up as Customer</a></li>
-          <li><a class="nav-link scrollto" href="index.html#driver">Sign up as Captain</a></li>
+          <li><a class="nav-link scrollto" href="index.jsp#hero">Home</a></li>
+          <li><a class="nav-link scrollto" href="index.jsp#about">Sign up as Customer</a></li>
+          <li><a class="nav-link scrollto" href="index.jsp#driver">Sign up as Captain</a></li>
           <li class="dropdown"><a href="#">
           <span>
           <%  
@@ -116,8 +128,8 @@ else{
               
               <!-- Dropdown - User Information -->
              <ul>
-              <li><label><a href="Update.html"><i class="fa-solid fa-user"></i>&nbsp;&nbsp;Profile</a></label></li>
-              <li><label><a href="#"><i class="fa-solid fa-car"></i>&nbsp;&nbsp;Ride History</a></label></li>
+              <li><label><a href="Update.jsp"><i class="fa-solid fa-user"></i>&nbsp;&nbsp;Profile</a></label></li>
+              <li><label><a href="RideHisttory.jsp"><i class="fa-solid fa-car"></i>&nbsp;&nbsp;Ride History</a></label></li>
               <li><label><a href="index.jsp"><i class="fa-solid fa-right-from-bracket"></i>&nbsp;&nbsp;Logout</a></label></li>
             </ul>
           </li>
@@ -157,13 +169,15 @@ else{
 	  <!-- End Breadcrumbs Section -->
 
      <!-- ======= About Section ======= -->
-    <section id="DriverLogin" class="about">
+    <section class="about">
       <div class="container-fluid">
 		  <center>
 		  <p>To get started Enter your Pickup and drop off location below.</p>
 			  </center>
 		  <br>
+		   <form action="Ride.jsp" method="post">
 	  <div class="form-group row mt-1 justify-content-center">
+	  
       <div class="col-sm-3">
        <input type="text" class="form-control" name="Pick"
         placeholder="Enter Pickup Location">
@@ -175,11 +189,11 @@ else{
        <input type="text" class="form-control" name="Drop"
         placeholder="Enter Dropoff Location">
       </div>
+      <input type="hidden" id="demo" value="" name="Fare">
      </div>
 		  
 	 <div class="row justify-content-center">
        <button type="submit" class="btn btn-success col-sm-2 p-2 mt-4">Confirm Location</button>
-
 		 </div>
 
         <!--Google map-->
@@ -237,3 +251,9 @@ else{
 </body>
 
 </html>
+<script>
+let x = document.getElementById("demo").innerHTML =
+(Math.floor(Math.random() * 300)+250);
+
+document.getElementById("demo").value = x;
+</script>

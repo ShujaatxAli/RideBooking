@@ -1,5 +1,8 @@
+<%@page import="main.Driver"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    
+<%@ page import="main.*" %>
     
 <%@page import="java.sql.*,java.util.*"%>
  
@@ -60,7 +63,7 @@ ResultSet resultSet = null;
         <a class="nav-link" href="#">Driver Information</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Logout</a>
+        <a class="nav-link" href="index.jsp">Logout</a>
       </li>
     </ul>
   </div>
@@ -77,14 +80,7 @@ ResultSet resultSet = null;
 <button type="submit" name="Cust" class="btn col-sm-2 btn-success p-2 mt-5 mr-3">View Customer Data</button>	
 <button type="submit" name="Driver" class="btn col-sm-2 btn-success p-2 mt-5 mr-3">View Driver Data</button>	
 <button type="submit" name="Veh" class="btn col-sm-2 btn-success p-2 mt-5 mr-3">View Vehicle Data</button>	
-<button type="submit" name="Ride" class="btn col-sm-2 btn-success p-2 mt-5 mr-3">View Ride History</button>
-<button type="submit" class="btn col-sm-2 btn-success p-2 mt-5 mr-3">View Driver's Rating</button>
-</div>
-	
-<div class="row">
-<button type="submit" name="Fare" class="btn col-sm-2 btn-info p-2 mt-5 mr-3">View Fare Record</button>
-<button type="submit" name="Book" class="btn col-sm-2 btn-info p-2 mt-5 mr-3">View Booking Record</button>
-<button type="submit" name="Comp" class="btn col-sm-2 btn-danger p-2 mt-5 mr-3">View Complaints</button>
+<button type="submit" name="Book" class="btn col-sm-3 btn-info p-2 mt-5 mr-3">View Booking & Fare Record</button>
 </div>
 </form>
 	
@@ -111,22 +107,29 @@ if (request.getParameter("Cust") != null) {
   <tbody>
     
     <% 
-	   	connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/ridebooking", "root", "root");
-	   	statement=connection.createStatement();
-	   	String cus ="select * from customer";
-	   	resultSet = statement.executeQuery(cus);
-	   	while(resultSet.next()){ %>
-	   	
-	 <tr>
-      <th><%=resultSet.getString("Cust_ID") %></th>
-	  <td><%=resultSet.getString("Cust_Fname") %> <%=resultSet.getString("Cust_Lname") %> </td>
-	  <td><%=resultSet.getString("Cust_Email") %></td>
-	  <td><%=resultSet.getString("Cust_Phone") %></td>
-	  <td><%=resultSet.getString("Cust_Pass") %></td>
-    </tr>
-		
-		<%
-	}
+    Customer custobj = new Customer();
+
+    ArrayList<String> ls  = custobj.getCustomerInfo();
+
+    int z=0;
+    for (int i=0;i<(ls.size()/5);i++)
+    {
+
+    %>
+
+    <tr>
+    <%
+    for(int j=0; j<5; j++)
+    {
+    %> 	 
+         <td><% out.println(ls.get(i*5+j)); %></td>
+    <%
+    }
+
+    %>
+    	</tr>
+    <%
+    }
 
 }
 else if (request.getParameter("Driver") != null) { 
@@ -145,24 +148,116 @@ else if (request.getParameter("Driver") != null) {
 <tbody>
 
 <% 
-    
-   	connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/ridebooking", "root", "root");
-   	statement=connection.createStatement();
-   	String cus ="select driver.Driver_ID,driver.Driver_Fname,driver.Driver_Lname,driver.Driver_Phone,driver.Driver_Pass,driver.Driver_DLC,car.Car_Make,car.Car_Name,car.Car_Model,car.Car_Color  from driver,car Where driver.Car_ID = car.Car_ID";
-   	resultSet = statement.executeQuery(cus);
-   	while(resultSet.next()){ %>
-   		
-   	 <tr>
-     <th><%=resultSet.getString("Driver_ID") %></th>
-	  <td><%=resultSet.getString("Driver_Fname") %> <%=resultSet.getString("Driver_Lname") %> </td>
-	  <td><%=resultSet.getString("Driver_Phone") %></td>
-	  <td><%=resultSet.getString("Driver_Pass") %></td>
-	  <td><%=resultSet.getString("Driver_DLC") %></td>
-	  <td><%=resultSet.getString("Car_Make") %> <%=resultSet.getString("Car_Name") %> <%=resultSet.getString("Car_Model") %> <%=resultSet.getString("Car_Color") %></td>
-	  
-   </tr>
+
+Driver carrrr = new Driver();
+
+ArrayList<String> ls  = carrrr.getDriverInfo();
+
+int z=0;
+for (int i=0;i<(ls.size()/6);i++)
+{
+
+%>
+
+<tr>
+<%
+for(int j=0; j<6; j++)
+{
+%> 	 
+     <td><% out.println(ls.get(i*6+j)); %></td>
+<%
+}
+
+%>
+	</tr>
+<%
+}
+
+}
+else if (request.getParameter("Veh") != null) { 
 	
-	<%
+	
+	%>
+    <tr>
+  <th scope="col">Car ID</th>
+  <th scope="col">Car Make</th>
+  <th scope="col">Car Name</th>
+  <th scope="col">Car Variant</th>
+  <th scope="col">Car Model</th>
+  <th scope="col">Car Color</th>
+  <th scope="col">Car Registration #</th>
+</tr>
+  </thead>
+<tbody>
+
+<%
+
+Car carrrr = new Car();
+
+ArrayList<String> ls  = carrrr.getCarInfo();
+
+int z=0;
+for (int i=0;i<(ls.size()/7);i++)
+{
+
+%>
+
+<tr>
+<%
+for(int j=0; j<7; j++)
+{
+%> 	 
+     <td><% out.println(ls.get(i*7+j)); %></td>
+<%
+}
+
+%>
+	</tr>
+<%
+}
+
+
+}
+else if (request.getParameter("Book") != null) { 
+	
+	
+	%>
+    <tr>
+  <th scope="col">Book ID</th>
+  <th scope="col">Pick up Location</th>
+  <th scope="col">Drop off Location</th>
+  <th scope="col">Fare</th>
+  <th scope="col">Customer</th>
+  <th scope="col">Driver</th>
+  <th scope="col">Car Details</th>
+</tr>
+  </thead>
+<tbody>
+
+<% 
+    
+Booking bookingobj = new Booking();
+
+ArrayList<String> ls  = bookingobj.getBookingInfo();
+
+int z=0;
+for (int i=0;i<(ls.size()/7);i++)
+{
+
+%>
+
+<tr>
+<%
+for(int j=0; j<7; j++)
+{
+%> 	 
+     <td><% out.println(ls.get(i*7+j)); %></td>
+<%
+}
+
+%>
+	</tr>
+<%
 }
 
 }
