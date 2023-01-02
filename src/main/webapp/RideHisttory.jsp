@@ -3,25 +3,36 @@
     
 <%@page import="java.sql.*,java.util.*"%>
 
-    
-          <!-- =============== BACK END ==================== -->
+<!-- =============== BACK END ==================== -->
           
 <%
 
+String driverName = "com.mysql.jdbc.Driver";
+Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ridebooking", "root", "root");
+
+Connection connection = null;
+Statement statement = null;
+ResultSet resultSet = null;
+
 String Pick = request.getParameter("Pick");
 String Drop = request.getParameter("Drop");
+int ID = 0;
+int Status = 0;
 
-try
-{
-		
-	Class.forName("com.mysql.jdbc.Driver");
-	Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ridebooking", "root", "root");
-	Statement st=conn.createStatement();
-   
-   int i=st.executeUpdate("insert into booking(Pick_Location, Drop_location)values('"+Pick+"','"+Drop+"')");
+String Email=(String)session.getAttribute("Email");
+String Pass=(String)session.getAttribute("Pass");  
+
+Class.forName("com.mysql.jdbc.Driver");
+Statement stt=conn.createStatement();
+
+ ResultSet rs=stt.executeQuery("select * from customer where Cust_Email = '"+Email+"'");
+ while(rs.next()){
+     ID=rs.getInt("Cust_ID");
+     }
+
+
 
   %>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -30,7 +41,7 @@ try
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>RideEase - Customer</title>
+  <title>RideEase - Customer Login</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -50,32 +61,15 @@ try
   <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
 </head>
-<style>
-
-.map-container{
-  overflow:hidden;
-  padding-bottom:56.25%;
-  position:relative;
-  height:0;
-}
-.map-container iframe{
-  left:0;
-  top:0;
-  height:100%;
-  width:100%;
-  position:absolute;
-}
-	
-</style>
 
 <body>
 
-
- <!-- ======= Header ======= -->
+  <!-- ======= Header ======= -->
   <header id="header" class="fixed-top d-flex align-items-center ">
     <div class="container d-flex align-items-center justify-content-between">
 
@@ -83,11 +77,11 @@ try
         <h1><a href="index.html"><span>RideEase</span></a></h1>
       </div>
 
-      <nav id="navbar" class="navbar">
+       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto" href="index.html#hero">Home</a></li>
-          <li><a class="nav-link scrollto" href="index.html#about">Sign up as Customer</a></li>
-          <li><a class="nav-link scrollto" href="index.html#driver">Sign up as Captain</a></li>
+          <li><a class="nav-link scrollto" href="index.jsp#hero">Home</a></li>
+          <li><a class="nav-link scrollto" href="index.jsp#about">Sign up as Customer</a></li>
+          <li><a class="nav-link scrollto" href="index.jsp#driver">Sign up as Captain</a></li>
           <li class="dropdown"><a href="#">
           <span>
           <%  
@@ -107,8 +101,8 @@ try
               
               <!-- Dropdown - User Information -->
              <ul>
-              <li><label><a href="Update.html"><i class="fa-solid fa-user"></i>&nbsp;&nbsp;Profile</a></label></li>
-              <li><label><a href="#"><i class="fa-solid fa-car"></i>&nbsp;&nbsp;Ride History</a></label></li>
+              <li><label><a href="Update.jsp"><i class="fa-solid fa-user"></i>&nbsp;&nbsp;Profile</a></label></li>
+              <li><label><a href="RideHisttory.jsp"><i class="fa-solid fa-car"></i>&nbsp;&nbsp;Ride History</a></label></li>
               <li><label><a href="index.jsp"><i class="fa-solid fa-right-from-bracket"></i>&nbsp;&nbsp;Logout</a></label></li>
             </ul>
           </li>
@@ -124,66 +118,94 @@ try
     <!-- ======= Breadcrumbs Section ======= -->
     <section class="breadcrumbs">
       <div class="container">
-
-        <div class="d-flex justify-content-start align-items-center">
-			
-			<h3>Welcomer 
-			<%  
-			resultSet = statement.executeQuery(sql);
-			while(resultSet.next()){
-			%>
-			<strong>
-			<%=resultSet.getString("Cust_Fname") %>
-			<%=resultSet.getString("Cust_Lname") %>
-			</strong>
-			<%
-			}
-			%>
-			</h3>
-			
-		</div>
+      
+        <div class="d-flex justify-content-end align-items-center">
+          <ol>
+            <li><a href="CustDashboard.jsp">Dashboard</a></li>
+            <li>Ride History</li>
+          </ol>
+        </div>
 
       </div>
     </section>
 	  <!-- End Breadcrumbs Section -->
+	  
+	     <!-- ======= About Section ======= -->
+    <section id="CustLogin" class="about">
+      <div class="container-fluid mt-2">
 
-     <!-- ======= About Section ======= -->
-    <section id="DriverLogin" class="about">
-      <div class="container-fluid">
-		  <center>
-		  <p>To get started Enter your Pickup and drop off location below.</p>
-			  </center>
-		  <br>
-	  <div class="form-group row mt-1 justify-content-center">
-      <div class="col-sm-3">
-       <input type="text" class="form-control" name="Pick"
-        placeholder="Enter Pickup Location">
-      </div>
-		  <div class="col-sm-1">
-		  <i class="bi bi-arrow-left-right p-5" style="font-size: 25px"></i>
+      <div class="row justify-content-center">
+			<div class="col-5">
+			<center>
+			<h1>Your Ride History</h1>
+			<hr>
+			</center>
+			<br>
+			
+			
+			<table class="table">
+			  <thead>
+			    <tr>
+			      <th scope="col">Pick Location</th>
+			      <th scope="col">Drop Location</th>
+			      <th scope="col">Fare</th>
+			      <th scope="col">Status</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			   <%
+			  	  Class.forName("com.mysql.jdbc.Driver");
+			  	  Statement st=conn.createStatement();
+			      ResultSet rs2=st.executeQuery("select * from booking where Customer_ID = "+ID);
+			      while(rs2.next()){
+			          
+			      %>
+			    <tr>
+			      <td><%=rs2.getString(2) %></td>
+			      <td><%=rs2.getString(3) %></td>
+			      <td>Rs. <%=rs2.getString(4) %></td>
+			      <td>
+			      <%
+			      Status = rs2.getInt(7);
+			      
+			      if(Status == 1){
+			    	  %><font color="green">Completed</font><%
+			      }
+			      else if(Status == 2){
+			    	  %><font color="red">Rejected</font><%
+			      }
+			      else{
+			    	  out.print("Pending");
+			      }
+			      %>
+			      </td>
+			    </tr>
+			  <%
+			      }
+			  %>
+			  </tbody>
+			</table>
+
+    	  <form action="CustDashboard.jsp">
+          <div class="row justify-content-center">
+          <input type="hidden" name="Email"  value="<%=Email %>">
+          <input type="hidden" name="Pass"  value="<%=Pass %>">
+		  <button type="submit" class="btn btn-primary col-3 p-2 mt-3">Go Back</button>
 		  </div>
-		 <div class="col-sm-3">
-       <input type="text" class="form-control" name="Drop"
-        placeholder="Enter Dropoff Location">
-      </div>
-     </div>
-		  
-	 <div class="row justify-content-center">
-       <button type="submit" class="btn btn-success col-sm-2 p-2 mt-4">Confirm Location</button>
+		  </form>
 
-		 </div>
+        </div>
+        </div>
+          
 
-        <!--Google map-->
-<div id="map-container-google-2" class="z-depth-1-half map-container mt-5" style="height: 500px">
-  <iframe src="https://maps.google.com/maps?q=Karachi&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0"
-    style="border:0" allowfullscreen></iframe>
-</div>
 
-<!--Google Maps-->
 
-      </div>
+          </div>
+
     </section>
-	  <!-- End About Section -->
+
+
+<!-- End About Section -->
 	  
 	  <section class="breadcrumbs">
       <div class="container">
@@ -196,20 +218,6 @@ try
     </section>
 
   </main><!-- End #main -->
-
-  <!-- ======= Footer ======= -->
-  <footer id="footer">
-   
-
-    <div class="container">
-      <div class="copyright">
-        All Rights Reserved &copy;
-      </div>
-      <div class="credits">
-        Developed by <strong><a href="https://bootstrapmade.com/">Muhammad Shujaat Ali</a></strong> 
-      </div>
-    </div>
-  </footer><!-- End Footer -->
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
   <div id="preloader"></div>
@@ -228,3 +236,9 @@ try
 </body>
 
 </html>
+
+
+
+
+
+	  
