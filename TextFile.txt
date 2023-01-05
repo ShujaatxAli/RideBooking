@@ -1,0 +1,14 @@
+Registration:
+	If you want to get access on our application first you have to log in
+	 through your account. You can log in as a Customer or as a Driver.
+ 
+     *) Customer :
+	If you log in as a customer so he can book a ride and then after booking a request is sent to the driver.
+	
+     *) Driver :
+	If you log in as a driver so you can accept ride request sent by the customer.
+
+Ride Booking : 
+	Ride Booking is a use case of our application RIDE EASE . It is the process which perfomed by the customer to book a ride.
+	In this process Customer have to log in first then he will enter his pickup location and drop off location. Then a request is sent
+	to driver so he can accept it or deny. Fare is calculated according to the distance covered and time taken.
