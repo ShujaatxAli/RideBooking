@@ -12,23 +12,30 @@ public class Driver {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ridebooking", "root", "root");
-		   	Statement stmt =conn.createStatement();
+
+		   	Statement Stmt =conn.createStatement();
 		   	
-		   	String driver ="select Driver_ID,Driver_Fname,Driver_Lname,Driver_Phone,Driver_Pass,Driver_DLC,Car_ID from driver;";
+		   	String driver ="select Driver_ID   ,Driver_Fname   ,Driver_Lname   ,Driver_Phone   ,Driver_Pass   ,Driver_DLC   ,Car_ID from driver;";
 		   	
-		   	ResultSet rs = stmt.executeQuery(driver);
+		   	ResultSet op = Stmt.executeQuery(driver);
 
 			while(rs.next()){
 					   		
-				driverdetails.add(rs.getString(1));
-				driverdetails.add(rs.getString(2)+" "+rs.getString(3));
-				driverdetails.add(rs.getString(4));
-				driverdetails.add(rs.getString(5));
-				driverdetails.add(rs.getString(6));
-				driverdetails.add(rs.getString(7));
+				driverdetails.add(op.getString(1));
+
+				driverdetails.add(op.getString(2)+" "+op.getString(3));
+
+				driverdetails.add(op.getString(4));
+
+				driverdetails.add(op.getString(5));
+
+				driverdetails.add(op.getString(6));
+
+				driverdetails.add(op.getString(7));
+
+
 			}
 			conn.close();
-			
 			
 			}catch(Exception e) {
 				
