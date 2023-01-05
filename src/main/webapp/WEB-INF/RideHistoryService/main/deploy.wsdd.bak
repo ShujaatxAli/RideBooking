@@ -10,32 +10,25 @@
     xmlns="http://xml.apache.org/axis/wsdd/"
     xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
 
-  <!-- Services from CustomerService WSDL service -->
+  <!-- Services from RideHistoryService WSDL service -->
 
-  <service name="Customer" provider="java:RPC" style="wrapped" use="literal">
+  <service name="RideHistory" provider="java:RPC" style="wrapped" use="literal">
       <parameter name="wsdlTargetNamespace" value="http://main"/>
-      <parameter name="wsdlServiceElement" value="CustomerService"/>
+      <parameter name="wsdlServiceElement" value="RideHistoryService"/>
       <parameter name="schemaQualified" value="http://main"/>
-      <parameter name="wsdlServicePort" value="Customer"/>
-      <parameter name="className" value="main.CustomerSoapBindingImpl"/>
-      <parameter name="wsdlPortType" value="Customer"/>
+      <parameter name="wsdlServicePort" value="RideHistory"/>
+      <parameter name="className" value="main.RideHistorySoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="RideHistory"/>
       <parameter name="typeMappingVersion" value="1.2"/>
-      <operation name="getCustomerInfo" qname="operNS:getCustomerInfo" xmlns:operNS="http://main" returnQName="retNS:getCustomerInfoReturn" xmlns:retNS="http://main" returnType="rtns:ArrayOf_xsd_anyType" xmlns:rtns="http://main" returnItemQName="tns:item" xmlns:tns="http://main" soapAction="" >
+      <operation name="getRideHistory" qname="operNS:getRideHistory" xmlns:operNS="http://main" returnQName="retNS:getRideHistoryReturn" xmlns:retNS="http://main" returnType="rtns:ArrayOf_xsd_anyType" xmlns:rtns="http://main" returnItemQName="tns:item" xmlns:tns="http://main" soapAction="" >
+        <parameter qname="pns:ID" xmlns:pns="http://main" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
       </operation>
-      <parameter name="allowedMethods" value="getCustomerInfo"/>
+      <parameter name="allowedMethods" value="getRideHistory"/>
 
       <typeMapping
         xmlns:ns="http://main"
-        qname="ns:>getCustomerInfoResponse"
-        type="java:main.GetCustomerInfoResponse"
-        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
-        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
-        encodingStyle=""
-      />
-      <typeMapping
-        xmlns:ns="http://main"
-        qname="ns:>getCustomerInfo"
-        type="java:main.GetCustomerInfo"
+        qname="ns:>getRideHistory"
+        type="java:main.GetRideHistory"
         serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
         deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
         encodingStyle=""
@@ -45,6 +38,14 @@
         qname="ns:ArrayOf_xsd_anyType"
         type="java:java.lang.Object[]"
         innerType="cmp-ns:anyType" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://main"
+        qname="ns:>getRideHistoryResponse"
+        type="java:main.GetRideHistoryResponse"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
         encodingStyle=""
       />
   </service>

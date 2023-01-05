@@ -20,10 +20,32 @@
       <parameter name="className" value="main.DriverSoapBindingImpl"/>
       <parameter name="wsdlPortType" value="Driver"/>
       <parameter name="typeMappingVersion" value="1.2"/>
-      <operation name="getDriverInfo" qname="operNS:getDriverInfo" xmlns:operNS="http://main" returnQName="retNS:getDriverInfoReturn" xmlns:retNS="http://main" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
-        <parameter qname="pns:ID" xmlns:pns="http://main" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      <operation name="getDriverInfo" qname="operNS:getDriverInfo" xmlns:operNS="http://main" returnQName="retNS:getDriverInfoReturn" xmlns:retNS="http://main" returnType="rtns:ArrayOf_xsd_anyType" xmlns:rtns="http://main" returnItemQName="tns:item" xmlns:tns="http://main" soapAction="" >
       </operation>
       <parameter name="allowedMethods" value="getDriverInfo"/>
 
+      <typeMapping
+        xmlns:ns="http://main"
+        qname="ns:>getDriverInfoResponse"
+        type="java:main.GetDriverInfoResponse"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://main"
+        qname="ns:>getDriverInfo"
+        type="java:main.GetDriverInfo"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <arrayMapping
+        xmlns:ns="http://main"
+        qname="ns:ArrayOf_xsd_anyType"
+        type="java:java.lang.Object[]"
+        innerType="cmp-ns:anyType" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema"
+        encodingStyle=""
+      />
   </service>
 </deployment>

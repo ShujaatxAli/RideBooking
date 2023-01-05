@@ -10,9 +10,12 @@
       <parameter name="className" value="main.Booking"/>
       <parameter name="wsdlPortType" value="Booking"/>
       <parameter name="typeMappingVersion" value="1.2"/>
-      <operation xmlns:operNS="http://main" name="getBookingInfo" qname="operNS:getBookingInfo" soapAction="">
+      <operation xmlns:operNS="http://main" xmlns:retNS="http://main" xmlns:rtns="http://main" xmlns:tns="http://main" name="getBookingInfo" qname="operNS:getBookingInfo" returnQName="retNS:getBookingInfoReturn" returnType="rtns:ArrayOf_xsd_anyType" returnItemQName="tns:item" soapAction="">
       </operation>
       <parameter name="allowedMethods" value="getBookingInfo"/>
 
+      <typeMapping xmlns:ns="http://main" qname="ns:&gt;getBookingInfo" type="java:main.GetBookingInfo" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://main" qname="ns:&gt;getBookingInfoResponse" type="java:main.GetBookingInfoResponse" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <arrayMapping xmlns:ns="http://main" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema" qname="ns:ArrayOf_xsd_anyType" type="java:java.lang.Object[]" innerType="cmp-ns:anyType" encodingStyle=""/>
   </service>
 </deployment>

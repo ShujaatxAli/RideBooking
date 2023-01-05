@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Use this file to deploy some handlers/chains and services      --><!-- Two ways to do this:                                           --><!--   java org.apache.axis.client.AdminClient deploy.wsdd          --><!--      after the axis server is running                          --><!-- or                                                             --><!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   --><!--      from the same directory that the Axis engine runs         --><deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from RideHistoryService WSDL service -->
+
+  <service name="RideHistory" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://main"/>
+      <parameter name="wsdlServiceElement" value="RideHistoryService"/>
+      <parameter name="schemaQualified" value="http://main"/>
+      <parameter name="wsdlServicePort" value="RideHistory"/>
+      <parameter name="className" value="main.RideHistory"/>
+      <parameter name="wsdlPortType" value="RideHistory"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation xmlns:operNS="http://main" xmlns:retNS="http://main" xmlns:rtns="http://main" xmlns:tns="http://main" name="getRideHistory" qname="operNS:getRideHistory" returnQName="retNS:getRideHistoryReturn" returnType="rtns:ArrayOf_xsd_anyType" returnItemQName="tns:item" soapAction="">
+        <parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" xmlns:pns="http://main" qname="pns:ID" type="tns:string"/>
+      </operation>
+      <parameter name="allowedMethods" value="getRideHistory"/>
+
+      <typeMapping xmlns:ns="http://main" qname="ns:&gt;getRideHistory" type="java:main.GetRideHistory" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <arrayMapping xmlns:ns="http://main" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema" qname="ns:ArrayOf_xsd_anyType" type="java:java.lang.Object[]" innerType="cmp-ns:anyType" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://main" qname="ns:&gt;getRideHistoryResponse" type="java:main.GetRideHistoryResponse" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+  </service>
+</deployment>

@@ -10,19 +10,20 @@
     xmlns="http://xml.apache.org/axis/wsdd/"
     xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
 
-  <!-- Services from CarService WSDL service -->
+  <!-- Services from CustLoginService WSDL service -->
 
-  <service name="Car" provider="java:RPC" style="wrapped" use="literal">
+  <service name="CustLogin" provider="java:RPC" style="wrapped" use="literal">
       <parameter name="wsdlTargetNamespace" value="http://main"/>
-      <parameter name="wsdlServiceElement" value="CarService"/>
+      <parameter name="wsdlServiceElement" value="CustLoginService"/>
       <parameter name="schemaQualified" value="http://main"/>
-      <parameter name="wsdlServicePort" value="Car"/>
-      <parameter name="className" value="main.CarSoapBindingImpl"/>
-      <parameter name="wsdlPortType" value="Car"/>
+      <parameter name="wsdlServicePort" value="CustLogin"/>
+      <parameter name="className" value="main.CustLoginSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="CustLogin"/>
       <parameter name="typeMappingVersion" value="1.2"/>
-      <operation name="getCarInfo" qname="operNS:getCarInfo" xmlns:operNS="http://main" returnQName="retNS:getCarInfoReturn" xmlns:retNS="http://main" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+      <operation name="custLog" qname="operNS:CustLog" xmlns:operNS="http://main" returnQName="retNS:CustLogReturn" xmlns:retNS="http://main" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:ID" xmlns:pns="http://main" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
       </operation>
-      <parameter name="allowedMethods" value="getCarInfo"/>
+      <parameter name="allowedMethods" value="custLog"/>
 
   </service>
 </deployment>

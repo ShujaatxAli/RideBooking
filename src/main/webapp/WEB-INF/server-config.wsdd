@@ -7,8 +7,8 @@
   <ns1:parameter name="dotNetSoapEncFix" value="true"/>
   <ns1:parameter name="enableNamespacePrefixOptimization" value="false"/>
   <ns1:parameter name="sendXMLDeclaration" value="true"/>
-  <ns1:parameter name="attachments.implementation" value="org.apache.axis.attachments.AttachmentsImpl"/>
   <ns1:parameter name="sendXsiTypes" value="true"/>
+  <ns1:parameter name="attachments.implementation" value="org.apache.axis.attachments.AttachmentsImpl"/>
   <ns1:requestFlow>
    <ns1:handler type="java:org.apache.axis.handlers.JWSHandler">
     <ns1:parameter name="scope" value="session"/>
@@ -22,20 +22,51 @@
  <ns1:handler name="URLMapper" type="java:org.apache.axis.handlers.http.URLMapper"/>
  <ns1:handler name="Authenticate" type="java:org.apache.axis.handlers.SimpleAuthenticationHandler"/>
  <ns1:handler name="LocalResponder" type="java:org.apache.axis.transport.local.LocalResponder"/>
+ <ns1:service name="CustLogin" provider="java:RPC" style="wrapped" use="literal">
+  <ns2:operation name="custLog" qname="ns1:CustLog" returnQName="ns1:CustLogReturn" returnType="xsd:string" soapAction="" xmlns:ns1="http://main" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://xml.apache.org/axis/wsdd/">
+   <ns2:parameter qname="ns1:ID" type="xsd:string"/>
+  </ns2:operation>
+  <ns1:parameter name="sendMultiRefs" value="false"/>
+  <ns1:parameter name="wsdlServicePort" value="CustLogin"/>
+  <ns1:parameter name="schemaQualified" value="http://main"/>
+  <ns1:parameter name="className" value="main.CustLogin"/>
+  <ns1:parameter name="typeMappingVersion" value="1.2"/>
+  <ns1:parameter name="allowedMethods" value="custLog"/>
+  <ns1:parameter name="wsdlTargetNamespace" value="http://main"/>
+  <ns1:parameter name="wsdlServiceElement" value="CustLoginService"/>
+  <ns1:parameter name="wsdlPortType" value="CustLogin"/>
+  <ns1:parameter name="sendXsiTypes" value="false"/>
+ </ns1:service>
  <ns1:service name="AdminService" provider="java:MSG">
   <ns1:parameter name="allowedMethods" value="AdminService"/>
   <ns1:parameter name="enableRemoteAdmin" value="false"/>
   <ns1:parameter name="className" value="org.apache.axis.utils.Admin"/>
   <ns1:namespace>http://xml.apache.org/axis/wsdd/</ns1:namespace>
  </ns1:service>
+ <ns1:service name="RideBook" provider="java:RPC" style="wrapped" use="literal">
+  <ns1:operation name="bookARide" qname="ns2:bookARide" soapAction="" xmlns:ns2="http://main">
+   <ns1:parameter qname="ns2:Pick" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns2:Drop" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns2:ID" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns2:Fare" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:parameter name="allowedMethods" value="bookARide"/>
+  <ns1:parameter name="wsdlPortType" value="RideBook"/>
+  <ns1:parameter name="typeMappingVersion" value="1.2"/>
+  <ns1:parameter name="schemaQualified" value="http://main"/>
+  <ns1:parameter name="wsdlServicePort" value="RideBook"/>
+  <ns1:parameter name="className" value="main.RideBook"/>
+  <ns1:parameter name="wsdlTargetNamespace" value="http://main"/>
+  <ns1:parameter name="wsdlServiceElement" value="RideBookService"/>
+ </ns1:service>
  <ns1:service name="Version" provider="java:RPC">
   <ns1:parameter name="allowedMethods" value="getVersion"/>
   <ns1:parameter name="className" value="org.apache.axis.Version"/>
  </ns1:service>
  <ns1:service name="Customer" provider="java:RPC" style="wrapped" use="literal">
-  <ns2:operation name="getCustomerInfo" qname="ns1:getCustomerInfo" returnQName="ns1:getCustomerInfoReturn" returnType="xsd:string" soapAction="" xmlns:ns1="http://main" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://xml.apache.org/axis/wsdd/">
-   <ns2:parameter qname="ns1:ID" type="xsd:string"/>
-  </ns2:operation>
+  <ns1:operation name="getCustomerInfo" qname="ns3:getCustomerInfo" returnQName="ns3:getCustomerInfoReturn" returnType="xsd:string" soapAction="" xmlns:ns3="http://main" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns3:ID" type="xsd:string"/>
+  </ns1:operation>
   <ns1:parameter name="allowedMethods" value="getCustomerInfo"/>
   <ns1:parameter name="typeMappingVersion" value="1.2"/>
   <ns1:parameter name="wsdlPortType" value="Customer"/>
@@ -46,9 +77,7 @@
   <ns1:parameter name="wsdlServiceElement" value="CustomerService"/>
  </ns1:service>
  <ns1:service name="Car" provider="java:RPC" style="wrapped" use="literal">
-  <ns1:operation name="getCarInfo" qname="ns2:getCarInfo" returnQName="ns2:getCarInfoReturn" returnType="xsd:string" soapAction="" xmlns:ns2="http://main" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-   <ns1:parameter qname="ns2:ID" type="xsd:string"/>
-  </ns1:operation>
+  <ns1:operation name="getCarInfo" qname="ns4:getCarInfo" returnQName="ns4:getCarInfoReturn" returnType="xsd:string" soapAction="" xmlns:ns4="http://main" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
   <ns1:parameter name="allowedMethods" value="getCarInfo"/>
   <ns1:parameter name="wsdlPortType" value="Car"/>
   <ns1:parameter name="typeMappingVersion" value="1.2"/>
@@ -58,29 +87,58 @@
   <ns1:parameter name="wsdlTargetNamespace" value="http://main"/>
   <ns1:parameter name="wsdlServiceElement" value="CarService"/>
  </ns1:service>
+ <ns1:service name="RideHistory" provider="java:RPC" style="wrapped" use="literal">
+  <ns1:operation name="getRideHistory" qname="ns5:getRideHistory" soapAction="" xmlns:ns5="http://main">
+   <ns1:parameter qname="ns5:Email" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:parameter name="allowedMethods" value="getRideHistory"/>
+  <ns1:parameter name="typeMappingVersion" value="1.2"/>
+  <ns1:parameter name="wsdlPortType" value="RideHistory"/>
+  <ns1:parameter name="className" value="main.RideHistory"/>
+  <ns1:parameter name="wsdlServicePort" value="RideHistory"/>
+  <ns1:parameter name="schemaQualified" value="http://main"/>
+  <ns1:parameter name="wsdlTargetNamespace" value="http://main"/>
+  <ns1:parameter name="wsdlServiceElement" value="RideHistoryService"/>
+ </ns1:service>
  <ns1:service name="Driver" provider="java:RPC" style="wrapped" use="literal">
-  <ns1:operation name="getDriverInfo" qname="ns3:getDriverInfo" returnQName="ns3:getDriverInfoReturn" returnType="xsd:string" soapAction="" xmlns:ns3="http://main" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-   <ns1:parameter qname="ns3:ID" type="xsd:string"/>
+  <ns1:operation name="getDriverInfo" qname="ns6:getDriverInfo" returnQName="ns6:getDriverInfoReturn" returnType="xsd:string" soapAction="" xmlns:ns6="http://main" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns6:ID" type="xsd:string"/>
   </ns1:operation>
   <ns1:parameter name="allowedMethods" value="getDriverInfo"/>
-  <ns1:parameter name="wsdlPortType" value="Driver"/>
   <ns1:parameter name="typeMappingVersion" value="1.2"/>
-  <ns1:parameter name="schemaQualified" value="http://main"/>
-  <ns1:parameter name="wsdlServicePort" value="Driver"/>
+  <ns1:parameter name="wsdlPortType" value="Driver"/>
   <ns1:parameter name="className" value="main.Driver"/>
+  <ns1:parameter name="wsdlServicePort" value="Driver"/>
+  <ns1:parameter name="schemaQualified" value="http://main"/>
   <ns1:parameter name="wsdlTargetNamespace" value="http://main"/>
   <ns1:parameter name="wsdlServiceElement" value="DriverService"/>
  </ns1:service>
  <ns1:service name="Booking" provider="java:RPC" style="wrapped" use="literal">
-  <ns1:operation name="getBookingInfo" qname="ns4:getBookingInfo" soapAction="" xmlns:ns4="http://main"/>
-  <ns1:parameter name="allowedMethods" value="getBookingInfo"/>
-  <ns1:parameter name="typeMappingVersion" value="1.2"/>
-  <ns1:parameter name="wsdlPortType" value="Booking"/>
-  <ns1:parameter name="className" value="main.Booking"/>
+  <ns1:operation name="getBookingInfo" qname="ns7:getBookingInfo" returnType="soapenc:Array" soapAction="" xmlns:ns7="http://main" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"/>
+  <ns1:parameter name="sendMultiRefs" value="false"/>
   <ns1:parameter name="wsdlServicePort" value="Booking"/>
   <ns1:parameter name="schemaQualified" value="http://main"/>
+  <ns1:parameter name="className" value="main.Booking"/>
+  <ns1:parameter name="typeMappingVersion" value="1.2"/>
+  <ns1:parameter name="allowedMethods" value="getBookingInfo"/>
   <ns1:parameter name="wsdlTargetNamespace" value="http://main"/>
   <ns1:parameter name="wsdlServiceElement" value="BookingService"/>
+  <ns1:parameter name="wsdlPortType" value="Booking"/>
+  <ns1:parameter name="sendXsiTypes" value="false"/>
+ </ns1:service>
+ <ns1:service name="LoginDetails" provider="java:RPC" style="wrapped" use="literal">
+  <ns1:operation name="getLoginInfo" qname="ns8:getLoginInfo" returnQName="ns8:getLoginInfoReturn" returnType="xsd:int" soapAction="" xmlns:ns8="http://main" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns8:Email" type="xsd:string"/>
+   <ns1:parameter qname="ns8:Pass" type="xsd:string"/>
+  </ns1:operation>
+  <ns1:parameter name="allowedMethods" value="getLoginInfo"/>
+  <ns1:parameter name="typeMappingVersion" value="1.2"/>
+  <ns1:parameter name="wsdlPortType" value="LoginDetails"/>
+  <ns1:parameter name="className" value="main.LoginDetails"/>
+  <ns1:parameter name="wsdlServicePort" value="LoginDetails"/>
+  <ns1:parameter name="schemaQualified" value="http://main"/>
+  <ns1:parameter name="wsdlTargetNamespace" value="http://main"/>
+  <ns1:parameter name="wsdlServiceElement" value="LoginDetailsService"/>
  </ns1:service>
  <ns1:transport name="http">
   <ns1:requestFlow>

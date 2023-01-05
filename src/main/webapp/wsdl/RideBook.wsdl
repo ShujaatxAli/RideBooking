@@ -4,44 +4,47 @@
 Built on Apr 22, 2006 (06:55:48 PDT)-->
  <wsdl:types>
   <schema elementFormDefault="qualified" targetNamespace="http://main" xmlns="http://www.w3.org/2001/XMLSchema">
-   <element name="getCarInfo">
-    <complexType/>
-   </element>
-   <element name="getCarInfoResponse">
+   <element name="bookARide">
     <complexType>
      <sequence>
-      <element maxOccurs="unbounded" name="getCarInfoReturn" type="xsd:string"/>
+      <element name="Pick" type="xsd:string"/>
+      <element name="Drop" type="xsd:string"/>
+      <element name="ID" type="xsd:int"/>
+      <element name="Fare" type="xsd:string"/>
      </sequence>
     </complexType>
+   </element>
+   <element name="bookARideResponse">
+    <complexType/>
    </element>
   </schema>
  </wsdl:types>
 
-   <wsdl:message name="getCarInfoResponse">
+   <wsdl:message name="bookARideResponse">
 
-      <wsdl:part element="impl:getCarInfoResponse" name="parameters">
-
-      </wsdl:part>
-
-   </wsdl:message>
-
-   <wsdl:message name="getCarInfoRequest">
-
-      <wsdl:part element="impl:getCarInfo" name="parameters">
+      <wsdl:part element="impl:bookARideResponse" name="parameters">
 
       </wsdl:part>
 
    </wsdl:message>
 
-   <wsdl:portType name="Car">
+   <wsdl:message name="bookARideRequest">
 
-      <wsdl:operation name="getCarInfo">
+      <wsdl:part element="impl:bookARide" name="parameters">
 
-         <wsdl:input message="impl:getCarInfoRequest" name="getCarInfoRequest">
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="RideBook">
+
+      <wsdl:operation name="bookARide">
+
+         <wsdl:input message="impl:bookARideRequest" name="bookARideRequest">
 
        </wsdl:input>
 
-         <wsdl:output message="impl:getCarInfoResponse" name="getCarInfoResponse">
+         <wsdl:output message="impl:bookARideResponse" name="bookARideResponse">
 
        </wsdl:output>
 
@@ -49,21 +52,21 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:portType>
 
-   <wsdl:binding name="CarSoapBinding" type="impl:Car">
+   <wsdl:binding name="RideBookSoapBinding" type="impl:RideBook">
 
       <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
 
-      <wsdl:operation name="getCarInfo">
+      <wsdl:operation name="bookARide">
 
          <wsdlsoap:operation soapAction=""/>
 
-         <wsdl:input name="getCarInfoRequest">
+         <wsdl:input name="bookARideRequest">
 
             <wsdlsoap:body use="literal"/>
 
          </wsdl:input>
 
-         <wsdl:output name="getCarInfoResponse">
+         <wsdl:output name="bookARideResponse">
 
             <wsdlsoap:body use="literal"/>
 
@@ -73,11 +76,11 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:binding>
 
-   <wsdl:service name="CarService">
+   <wsdl:service name="RideBookService">
 
-      <wsdl:port binding="impl:CarSoapBinding" name="Car">
+      <wsdl:port binding="impl:RideBookSoapBinding" name="RideBook">
 
-         <wsdlsoap:address location="http://localhost:8080/RideBooking/services/Car"/>
+         <wsdlsoap:address location="http://localhost:8080/RideBooking/services/RideBook"/>
 
       </wsdl:port>
 

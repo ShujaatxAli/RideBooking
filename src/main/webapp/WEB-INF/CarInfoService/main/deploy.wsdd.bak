@@ -10,32 +10,32 @@
     xmlns="http://xml.apache.org/axis/wsdd/"
     xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
 
-  <!-- Services from CustomerService WSDL service -->
+  <!-- Services from CarInfoService WSDL service -->
 
-  <service name="Customer" provider="java:RPC" style="wrapped" use="literal">
+  <service name="CarInfo" provider="java:RPC" style="wrapped" use="literal">
       <parameter name="wsdlTargetNamespace" value="http://main"/>
-      <parameter name="wsdlServiceElement" value="CustomerService"/>
+      <parameter name="wsdlServiceElement" value="CarInfoService"/>
       <parameter name="schemaQualified" value="http://main"/>
-      <parameter name="wsdlServicePort" value="Customer"/>
-      <parameter name="className" value="main.CustomerSoapBindingImpl"/>
-      <parameter name="wsdlPortType" value="Customer"/>
+      <parameter name="wsdlServicePort" value="CarInfo"/>
+      <parameter name="className" value="main.CarInfoSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="CarInfo"/>
       <parameter name="typeMappingVersion" value="1.2"/>
-      <operation name="getCustomerInfo" qname="operNS:getCustomerInfo" xmlns:operNS="http://main" returnQName="retNS:getCustomerInfoReturn" xmlns:retNS="http://main" returnType="rtns:ArrayOf_xsd_anyType" xmlns:rtns="http://main" returnItemQName="tns:item" xmlns:tns="http://main" soapAction="" >
+      <operation name="getCarInfo" qname="operNS:getCarInfo" xmlns:operNS="http://main" returnQName="retNS:getCarInfoReturn" xmlns:retNS="http://main" returnType="rtns:ArrayOf_xsd_anyType" xmlns:rtns="http://main" returnItemQName="tns:item" xmlns:tns="http://main" soapAction="" >
       </operation>
-      <parameter name="allowedMethods" value="getCustomerInfo"/>
+      <parameter name="allowedMethods" value="getCarInfo"/>
 
       <typeMapping
         xmlns:ns="http://main"
-        qname="ns:>getCustomerInfoResponse"
-        type="java:main.GetCustomerInfoResponse"
+        qname="ns:>getCarInfoResponse"
+        type="java:main.GetCarInfoResponse"
         serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
         deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
         encodingStyle=""
       />
       <typeMapping
         xmlns:ns="http://main"
-        qname="ns:>getCustomerInfo"
-        type="java:main.GetCustomerInfo"
+        qname="ns:>getCarInfo"
+        type="java:main.GetCarInfo"
         serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
         deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
         encodingStyle=""

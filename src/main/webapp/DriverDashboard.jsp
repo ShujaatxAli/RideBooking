@@ -27,7 +27,7 @@ if(rs.next()){
 	
 }
 else{
-	%><script>  window.location='error.jsp' </script><%
+	%><script>  window.location='error2.jsp' </script><%
 }
 	
 %>
@@ -95,9 +95,9 @@ else{
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto" href="index.html#hero">Home</a></li>
-          <li><a class="nav-link scrollto" href="index.html#about">Sign up as Customer</a></li>
-          <li><a class="nav-link scrollto" href="index.html#driver">Sign up as Captain</a></li>
+          <li><a class="nav-link scrollto" href="index.jsp#hero">Home</a></li>
+          <li><a class="nav-link scrollto" href="index.jsp#about">Sign up as Customer</a></li>
+          <li><a class="nav-link scrollto" href="index.jsp#driver">Sign up as Captain</a></li>
 			  <li class="dropdown"><a href="#">
 			  <span>
 			  <%  
@@ -177,19 +177,23 @@ else{
       <th scope="col">Fare</th>
       <th scope="col">Requests</th>
     </tr>
+      </thead>
+  <tbody>
+
     <%
 try{
+	
 connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/ridebooking", "root", "root");
 statement=connection.createStatement();
-String book ="select * from booking";
+
+
+String book ="select customer.Cust_Fname, customer.Cust_Lname, booking.Pick_Location, booking.Drop_location, booking.Fare, booking.Status from customer,booking where customer.Cust_ID = booking.Customer_ID and booking.Status = 0";
 resultSet = statement.executeQuery(book);
 while(resultSet.next()){
 %>
-  </thead>
-  <tbody>
 <tr>
 <th scope="row">1</th>
-<td>Saif</td>
+<td><%=resultSet.getString("Cust_Fname") %> <%=resultSet.getString("Cust_Lname") %></td>
 <td><%=resultSet.getString("Pick_Location") %></td>
 <td><%=resultSet.getString("Drop_location") %></td>
 <td>Rs. <%=resultSet.getString("Fare") %></td>

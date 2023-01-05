@@ -5,19 +5,20 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
  <wsdl:types>
   <schema elementFormDefault="qualified" targetNamespace="http://main" xmlns="http://www.w3.org/2001/XMLSchema">
    <element name="getCustomerInfo">
-    <complexType>
-     <sequence>
-      <element name="ID" type="xsd:string"/>
-     </sequence>
-    </complexType>
+    <complexType/>
    </element>
    <element name="getCustomerInfoResponse">
     <complexType>
      <sequence>
-      <element name="getCustomerInfoReturn" type="xsd:string"/>
+      <element name="getCustomerInfoReturn" type="impl:ArrayOf_xsd_anyType"/>
      </sequence>
     </complexType>
    </element>
+   <complexType name="ArrayOf_xsd_anyType">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="xsd:anyType"/>
+    </sequence>
+   </complexType>
   </schema>
  </wsdl:types>
 
