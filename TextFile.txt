@@ -1,14 +1,24 @@
+Ammar:
+========
 Registration:
 	If you want to get access on our application first you have to log in
 	 through your account. You can log in as a Customer or as a Driver.
  
      *) Customer :
-	If you log in as a customer so he can book a ride and then after booking a request is sent to the driver.
+	If you log in as a customer so he can book a ride and then after booking a request is sent 	to the driver.
 	
      *) Driver :
 	If you log in as a driver so you can accept ride request sent by the customer.
 
 Ride Booking : 
-	Ride Booking is a use case of our application RIDE EASE . It is the process which perfomed by the customer to book a ride.
-	In this process Customer have to log in first then he will enter his pickup location and drop off location. Then a request is sent
-	to driver so he can accept it or deny. Fare is calculated according to the distance covered and time taken.
+	Ride Booking is a use case of our application RIDE EASE . It is the process which perfomed by the customer to book a ride. In this process Customer have to log in first then he will enter his pickup location and drop off location. Then a request is sent to driver so he can accept it or deny. Fare is calculated according to the distance covered and time taken.
+
+
+Shujaat
+=======
+
+Ride History:
+	A Ride History is maintained to keep the record of Total rides. Ride History logs all of your past rides and combines rides that were taken in the same day into one charge. In the detailed view of a ride, you can see the route your driver took. including the complete driver, customer and vehicle details.
+
+Rating : 
+	A customer can give ratings to a driver aacording to his service and drive quality and overall experiece than with the help of rating drivers can be ranked out among all drivers. Where as also driver can rate customers by which company monitor customer behaviour among drivers.
